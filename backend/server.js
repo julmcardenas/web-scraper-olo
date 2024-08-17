@@ -31,6 +31,9 @@ app.get("/api/products", (req, res) => {
 //   res.sendFile(path.join(__dirname, "client/build/index.html"));
 // });
 
+const apiRoutes = require("./routes/scrape");
+app.use("/scrape", apiRoutes);
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

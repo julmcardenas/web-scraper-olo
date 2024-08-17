@@ -57,7 +57,7 @@ function App() {
               type="url"
               placeholder="Enter a URL"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={e => setUrl(e.target.value)}
               className="flex-1 p-3 border-none focus:ring-0"
             />
             <button type="submit" className="px-4 py-3 rounded-r-md">

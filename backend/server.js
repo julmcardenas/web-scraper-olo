@@ -1,9 +1,19 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const apiRoutes = require("./routes/scrape");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
+// Load environment variables
+dotenv.config();
+// Connect to MongoDB
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Enable CORS
 app.use(cors());
@@ -23,6 +33,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from the server!" });
 });
 app.get("/api/products", (req, res) => {
+  console.log("products are");
+  console.log("req.body", req.body);
+
   res.json({ message: "projects are" });
 });
 
@@ -31,7 +44,6 @@ app.get("/api/products", (req, res) => {
 //   res.sendFile(path.join(__dirname, "client/build/index.html"));
 // });
 
-const apiRoutes = require("./routes/scrape");
 app.use("/scrape", apiRoutes);
 
 app.listen(PORT, () => {

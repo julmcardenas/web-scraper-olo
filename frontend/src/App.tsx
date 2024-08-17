@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import DataTable from "./components/Table";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 const mock_data = {
   data: {
@@ -137,6 +138,14 @@ function App() {
           </div>
         )} */}
       </div>
+      <header>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </header>
     </div>
   );
 }

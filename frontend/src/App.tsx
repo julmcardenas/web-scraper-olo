@@ -5,24 +5,25 @@ import "./App.css";
 
 import axios from "axios";
 function App() {
-  const [url, setUrl] = useState("")
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  
-  const handleSubmit = async (e:any) => {
-    e.preventDefault()
-    setLoading(true)
+  // https://headstarter.co/
+  const [url, setUrl] = useState("");
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5001/api/products", {url});
+      const response = await axios.post("http://localhost:5001/scrape", { url });
       console.log(response.data);
-      setData(data)
-      setLoading(false)
-    } catch (err:any) {
-      setError(err.message)
-      setLoading(false)
+      setData(data);
+      setLoading(false);
+    } catch (err: any) {
+      setError(err.message);
+      setLoading(false);
     }
-  }
+  };
 
   // useEffect(() => {
   //   async function getData() {
@@ -43,7 +44,7 @@ function App() {
               type="url"
               placeholder="Enter a URL"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={e => setUrl(e.target.value)}
               className="flex-1 p-3 border-none focus:ring-0"
             />
             <button type="submit" className="px-4 py-3 rounded-r-md">

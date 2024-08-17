@@ -2,35 +2,49 @@ import { useEffect, useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
-
 import axios from "axios";
+import DataTable from "./components/Table";
+
+const mock_data = {
+  data: {
+    url: "https://headstarter.co/",
+    date: "2021-09-01",
+    description: "This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.",
+    headings: ["Heading 1", "Heading 2", "Heading 3"],
+    links: ["https://www.example.com", "https://www.example.com"],
+  },
+}
+
 function App() {
   const [url, setUrl] = useState("")
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  
-  const handleSubmit = async (e:any) => {
+  const [openModal, setOpenModal] = useState(false)
+  const [modalData, setModalData] = useState({url:null, description:null})
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
     setLoading(true)
     try {
-      const response = await axios.post("http://localhost:5001/api/products", {url});
-      console.log(response.data);
+      const response = await axios.post("http://localhost:5001/scrape", { url });
+      const data = response.data.data;
+      console.log(data);
       setData(data)
       setLoading(false)
-    } catch (err:any) {
+    } catch (err: any) {
       setError(err.message)
       setLoading(false)
     }
   }
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     const response = await axios.get("http://localhost:5001/api/products");
-  //     console.log(response.data);
-  //   }
-  //   getData();
-  // }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
@@ -60,6 +74,29 @@ function App() {
         {error && <div className="bg-red-500 text-red-50 p-4 rounded-md mb-8">{error}</div>}
         {data && (
           <div className="bg-card p-6 rounded-md shadow-md">
+            <h2 className="text-2xl font-bold mb-4">{data}</h2>
+          </div>
+        )}
+
+        <DataTable openModal={handleOpen} setModalData={setModalData}/>
+        
+        {openModal && modalData && (
+          // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          //   <div className="bg-white p-6 rounded-md shadow-md text-gray-600">
+          //     <h2 className="text-2xl font-bold mb-4">Modal</h2>
+          //     <p className="text-muted-foreground mb-4">{modalData.description}</p>
+          //     <button onClick={handleClose} className="px-4 py-2 bg-primary text-gray-600 rounded-md">
+          //       Close
+          //     </button>
+          //   </div>
+          // </div>
+          <>
+          <p><a>{modalData.url}</a></p>
+          <p>{modalData.description}</p>
+          </>
+        )}
+        {/* {data && (
+          <div className="bg-card p-6 rounded-md shadow-md">
             <h2 className="text-2xl font-bold mb-4">{data.title}</h2>
             <p className="text-muted-foreground mb-4">{data.description}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -85,7 +122,7 @@ function App() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

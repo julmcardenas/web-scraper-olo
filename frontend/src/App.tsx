@@ -9,20 +9,31 @@ const mock_data = {
   data: {
     url: "https://headstarter.co/",
     date: "2021-09-01",
-    description: "This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.",
+    description:
+      "This domain is for use in illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.",
     headings: ["Heading 1", "Heading 2", "Heading 3"],
     links: ["https://www.example.com", "https://www.example.com"],
   },
-}
+};
 
 function App() {
-  const [url, setUrl] = useState("")
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [openModal, setOpenModal] = useState(false)
-  const [modalData, setModalData] = useState({url:null, description:null, headings:[], links:[]})
+  const [url, setUrl] = useState("");
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState({ url: null, description: null });
 
+  useEffect(() => {
+    //get data
+    // setData(mock_data.data)
+
+    async function getData() {
+      const response = await axios.get("http://localhost:5001/");
+      console.log(response.data);
+    }
+    getData();
+  }, []);
   const handleOpen = () => {
     setOpenModal(true);
   };
@@ -32,8 +43,8 @@ function App() {
   };
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post("http://localhost:5001/scrape", { url });
       const data = response.data.data;
@@ -43,10 +54,10 @@ function App() {
       // TODO: store data in database
 
     } catch (err: any) {
-      setError(err.message)
-      setLoading(false)
+      setError(err.message);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
@@ -80,8 +91,8 @@ function App() {
           </div>
         )}
 
-        <DataTable openModal={handleOpen} setModalData={setModalData}/>
-        
+        <DataTable openModal={handleOpen} setModalData={setModalData} />
+
         {openModal && modalData && (
           // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           //   <div className="bg-white p-6 rounded-md shadow-md text-gray-600">
@@ -93,8 +104,10 @@ function App() {
           //   </div>
           // </div>
           <>
-          <p><a>{modalData.url}</a></p>
-          <p>{modalData.description}</p>
+            <p>
+              <a>{modalData.url}</a>
+            </p>
+            <p>{modalData.description}</p>
           </>
         )}
         {openModal && modalData && (

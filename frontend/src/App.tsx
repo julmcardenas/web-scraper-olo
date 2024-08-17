@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import DataTable from "./components/Table";
+import Navbar from "./components/NavBar";
 
 const mock_data = {
   data: {
@@ -16,13 +17,13 @@ const mock_data = {
   },
 };
 
-function App() {
+export default function App() {
   const [url, setUrl] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [openModal, setOpenModal] = useState(false);
-  const [modalData, setModalData] = useState({ url: null, description: null });
+  const [modalData, setModalData] = useState({ url: null, description: null, headings: [], links: [] });
 
   useEffect(() => {
     //get data
@@ -60,6 +61,8 @@ function App() {
   };
 
   return (
+    <>
+    <Navbar isLoggedIn={false} />
     <div className="flex flex-col items-center justify-center min-h-screen bg-background">
       <div className="max-w-2xl w-full px-4 md:px-6">
         <h1 className="text-3xl font-bold mb-4">Web Scraper</h1>
@@ -140,7 +143,6 @@ function App() {
         )}
       </div>
     </div>
+    </>
   );
 }
-
-export default App;

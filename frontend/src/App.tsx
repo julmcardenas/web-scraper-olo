@@ -21,7 +21,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [openModal, setOpenModal] = useState(false)
-  const [modalData, setModalData] = useState({url:null, description:null})
+  const [modalData, setModalData] = useState({url:null, description:null, headings:[], links:[]})
 
   const handleOpen = () => {
     setOpenModal(true);
@@ -40,6 +40,8 @@ function App() {
       console.log(data);
       setData(data)
       setLoading(false)
+      // TODO: store data in database
+
     } catch (err: any) {
       setError(err.message)
       setLoading(false)
@@ -95,15 +97,15 @@ function App() {
           <p>{modalData.description}</p>
           </>
         )}
-        {/* {data && (
-          <div className="bg-card p-6 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4">{data.title}</h2>
-            <p className="text-muted-foreground mb-4">{data.description}</p>
+        {openModal && modalData && (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">{modalData.url}</h2>
+            <p className="text-muted-foreground mb-4">{modalData.description}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <h3 className="text-lg font-bold mb-2">Headings</h3>
                 <ul className="list-disc pl-4 space-y-2">
-                  {data.headings.map((heading, i) => (
+                  {modalData.headings.map((heading, i) => (
                     <li key={i}>{heading}</li>
                   ))}
                 </ul>
@@ -111,7 +113,7 @@ function App() {
               <div>
                 <h3 className="text-lg font-bold mb-2">Links</h3>
                 <ul className="list-disc pl-4 space-y-2">
-                  {data.links.map((link, i) => (
+                  {modalData.links.map((link, i) => (
                     <li key={i}>
                       <a href="#" className="text-primary hover:underline">
                         {link}
@@ -122,7 +124,7 @@ function App() {
               </div>
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

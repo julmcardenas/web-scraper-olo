@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
@@ -6,39 +7,39 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
             <div className="container mx-auto flex justify-between items-center">
                 {/* Brand Name */}
                 <div className="text-white text-xl font-bold">
-                    <a href="/" className="text-white px-3 py-2 rounded hover:text-white">
+                    <Link to="/" className="text-white px-3 py-2 rounded hover:text-white">
                         ReviewPal
-                    </a>
+                    </Link>
 
                 </div>
 
                 {/* Navigation Links */}
                 <div className="flex space-x-4">
-                    <a href="/search" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
-                        Search for Products and Reviews
-                    </a>
-                    <a href="/trending" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                    <Link to="/search" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                        Search Reviews
+                    </Link>
+                    <Link to="/trending" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                         Trending Products
-                    </a>
-                    <a href="/history" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                    </Link>
+                    <Link to="/history" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                         Search History
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Right Section: Login/Signup or Profile */}
                 <div className="flex space-x-4">
                     {isLoggedIn ? (
-                        <a href="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                        <Link to="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                             Profile
-                        </a>
+                        </Link>
                     ) : (
                         <>
-                            <a href="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                            <Link to="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                                 Login
-                            </a>
-                            <a href="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+                            </Link>
+                            <Link to="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                                 Signup
-                            </a>
+                            </Link>
                         </>
                     )}
                 </div>

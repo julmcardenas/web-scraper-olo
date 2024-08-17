@@ -3,14 +3,24 @@ const path = require("path");
 const cors = require("cors");
 const apiRoutes = require("./routes/scrape");
 const dotenv = require("dotenv");
-const connectDB = require("./config/db");
+const { connectToDb, getDb } = require("./config/db");
+
 // Load environment variables
 dotenv.config();
-// Connect to MongoDB
-connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+//db connection
+let db;
+connectToDb(error => {
+  if (!error) {
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+    db = getDb();
+  }
+});
+console.log("db", db);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
@@ -29,8 +39,10 @@ app.use(
 app.use(express.static(path.join(__dirname, "client/build")));
 
 // Handle API requests here
-app.get("/", (req, res) => {
-  res.json({ message: "Hello from the server!" });
+app.get("/", async (req, res) => {
+  const respones = await db.collection("search").find({}).toArray();
+
+  res.json({ message: respones });
 });
 app.get("/api/products", (req, res) => {
   console.log("products are");
@@ -45,7 +57,3 @@ app.get("/api/products", (req, res) => {
 // });
 
 app.use("/scrape", apiRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});

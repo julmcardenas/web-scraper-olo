@@ -1,3 +1,4 @@
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +29,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
                 {/* Right Section: Login/Signup or Profile */}
                 <div className="flex space-x-4">
-                    {isLoggedIn ? (
+                    {/* {isLoggedIn ? (
                         <Link to="/" className="text-white hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
                             Profile
                         </Link>
@@ -41,7 +42,13 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
                                 Signup
                             </Link>
                         </>
-                    )}
+                    )} */}
+                    <SignedOut>
+                        <SignInButton />
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
                 </div>
             </div>
         </nav>

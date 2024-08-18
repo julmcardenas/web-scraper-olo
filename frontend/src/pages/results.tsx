@@ -183,7 +183,7 @@ export default function Results() {
                   What people are saying
                 </CardTitle>
               </CardHeader>
-              <CardContent></CardContent>
+              {/* <CardContent></CardContent> */}
             </Card>
           </div>
         </main>

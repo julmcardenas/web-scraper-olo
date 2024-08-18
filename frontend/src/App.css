@@ -1,42 +1,209 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  --background-1: #B57AFF;
+  --background-2: #FAF3F1;
+  --background-3: #F3EAFF;
+  --background-4: #FFE0CA; /* Light Orange */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* app.css */
+
+.nav-placeholder {
+  height: 80px; /* Default height */
+  background-color: var(--background-5); /* Ensure color is defined */
+  width: 100%;
 }
 
+/* Styles for Landing Container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Styles for Landing Content */
+.landing-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 2px solid red;
+  border-radius: 8px;
+}
+
+/* Styles for Search Section */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 860px;
+  border: 1px solid #000;
+  margin-right: 0px;
+}
+
+
+/* Styles for Search Section */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: 100%; /* Ensure it takes up full height of its parent */
+  width: 100%;
+}
+
+/* Styles for Search Bar Container */
+.search-bar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Align items vertically within the container */
+  justify-content: center; /* Center items horizontally within the container */
+  height: 96px;
+  width: 835px; /* Adjust max-width as needed */
+  border: 2px solid red; /* Optional: Border for visual debugging */
+}
+
+/* Other styles */
+.search-bar-button {
+  height: 100%;
+  min-width: 230px; 
+  border: 3px solid #000;
+  border-right: 0;
+  border-radius: 0;
+  font-size: 32px;
+  font-weight: 550;
+  background-color: var(--background-4);
+}
+
+.search-bar-field {
+  height: 100%;
+  width: 575px;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  height: 100%;
+  flex: 1;
+  padding: 30px;
+  border: 3px solid #000;
+  font-size: 32px;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 860px;
+  max-height: 500px;
+  border: 1px solid #000;
+}
+
+
+/* Mockup Section */
+.mockup-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  max-height: 500px;
+  border: 1px solid #000;
+}
+
+.mockup {
+  width: 100%; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure image fits within the box while maintaining aspect ratio */
+  max-width: 100%; /* Ensure image does not exceed container width */
+  max-height: 100%; /* Ensure image does not exceed container height */
+}
+
+
+/* Component Styling */
+
+
+/* Cards */
 .card {
-  padding: 2em;
+  border: 3px solid #000;
+  border-radius: 3px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-height: 80vh;
 }
 
-.read-the-docs {
-  color: #888;
+.card-header {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card-content {
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: normal; 
+  word-wrap: break-word;
+  text-align: justify; 
+  hyphens: auto;
+}
+
+/* Videos */
+
+.videoframe-main {
+  border: 3px solid #000;
+  overflow: hidden; /* Ensures content doesn't overflow the container */
+  aspect-ratio: 16 / 9; /* Maintains a 16:9 aspect ratio */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+}
+
+/* Media Query for Devices Smaller than 1024px */
+@media (max-width: 1024px) {
+  .nav-placeholder {
+    height: 80px; /* Default height */
+    background-color: var(--background-5); /* Ensure color is defined */
+    width: 100%;
+  }
+  
+  .search-bar-container {
+    height: 80px; /* Reduced height for smaller screens */
+    width: 100%;
+    max-width: 600px; /* Adjusted width */
+  }
+
+  .search-bar-button {
+    height: 80px; /* Reduced height */
+    max-width: 180px; /* Adjusted width */
+    font-size: 24px; /* Smaller font size */
+    justify-content: center;
+  }
+
+  .search-bar-field {
+    height: 80px; /* Reduced height */
+    max-width: 400px; /* Adjusted width */
+  }
+
+  .search-input {
+    height: 80px; /* Reduced height */
+    font-size: 24px; /* Smaller font size */
+  }
 }

@@ -1,7 +1,12 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/Card";
 import Input from "../components/ui/Input";
 import Badge from "../components/ui/Badge";
 import Navbar from "../components/NavBar";
@@ -48,35 +53,53 @@ export default function Results() {
   }
   return (
     <>
-      <Navbar />
-      <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4 mt-8">
-        <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="result-container w-screen min-h-screen bg-[#f7f3f0] flex flex-col items-center p-8">
+        <main className="result-grid w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
           <div className="col-span-1 row-span-1">
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-black">{title}</h1>
-              <div className="mt-2 flex justify-center items-center space-x-2">
-                <Badge variant="secondary" className="text-lg">
-                  {score}
-                </Badge>
-                <span className="text-lg font-semibold text-green-600">Great</span>
-              </div>
-              <div className="mt-4">
-                {videos[0] ? (
-                  <div
-                    key={videos[0].url}
-                    className="relative aspect-w-5 aspect-h-3 h-[300px] w-[500px] p-4 rounded-lg border border-black cursor-pointer bg-cover bg-center"
-                    style={{
-                      backgroundImage: `url(${videos[0].thumbnail})`,
-                    }}
-                    onClick={() => window.open(videos[0].link, "_blank", "noopener,noreferrer")}
-                  ></div>
-                ) : (
-                  <div>No video available</div>
-                )}
+            <h1 className="text-3xl font-bold text-black">{title}</h1>
+
+            <div className="videoframe-container">
+              {videos[0] ? (
+                <div
+                  key={videos[0].url}
+                  className="videoframe-main cursor-pointer"
+                  style={{
+                    backgroundImage: `url(${videos[0].thumbnail})`,
+                  }}
+                  onClick={() =>
+                    window.open(videos[0].link, "_blank", "noopener,noreferrer")
+                  }
+                ></div>
+              ) : (
+                <div>No video available</div>
+              )}
+            </div>
+
+            <div className="score-container border-3 border-dotted border-background-6 mt-4 p-4 h-full">
+              <div className="score-text-box">
+                <h1 className="text-4xl font-bold text-black">
+                  This product scores...{" "}
+                </h1>
+                <div className="mt-4 justify-center">
+                  <Badge
+                    variant="success"
+                    className="font-extrabold text-8xl p-8"
+                  >
+                    {score}
+                  </Badge>
+                </div>
+                <h1 className="text-2xl font-bold text-text-75 mt-2">
+                  Recommended
+                </h1>
               </div>
             </div>
           </div>
+
+
           <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg font-bold">Our Verdict</CardTitle>
@@ -85,9 +108,13 @@ export default function Results() {
                 <p>{review}</p>
               </CardContent>
             </Card>
+
+
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">Check out the videos:</CardTitle>
+                <CardTitle className="text-lg font-bold">
+                  Check out the videos:
+                </CardTitle>
               </CardHeader>
 
               <CardContent>
@@ -107,12 +134,16 @@ export default function Results() {
                       backgroundPosition: "center",
                       backgroundImage: `url(${video?.thumbnail})`, // Optional: Set a background thumbnail
                     }}
-                    onClick={() => window.open(video.link, "_blank", "noopener,noreferrer")}
+                    onClick={() =>
+                      window.open(video.link, "_blank", "noopener,noreferrer")
+                    }
                   ></div>
                 ))}
               </CardContent>
             </Card>
           </div>
+
+
           <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
             <Card>
               <CardHeader>
@@ -148,7 +179,9 @@ export default function Results() {
           <div className="col-span-1 row-span-3">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg font-bold">What people are saying</CardTitle>
+                <CardTitle className="text-lg font-bold">
+                  What people are saying
+                </CardTitle>
               </CardHeader>
               <CardContent></CardContent>
             </Card>

@@ -42,13 +42,13 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           <div className="flex flex-row space-y-4 items-center text-black">
             03
             <Link to="/history" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded">
-              SEARCH HISTORY
+              MY HISTORY
             </Link>
           </div>
           <div className="flex flex-row space-y-4 items-center text-black">
             04
             <Link to="/recent" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded">
-              RECENT SEARCH
+              LATEST SEARCHES
             </Link>
           </div>
         </div>

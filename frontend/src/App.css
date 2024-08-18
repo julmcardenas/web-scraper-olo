@@ -80,7 +80,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Other styles */
 .search-bar-button {
   height: 100%;
-  width: 230px; 
+  min-width: 230px; 
   border: 3px solid #000;
   border-right: 0;
   border-radius: 0;

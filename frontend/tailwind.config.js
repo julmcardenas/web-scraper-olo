@@ -12,7 +12,8 @@ export default {
         'background-3': '#F3EAFF', // Light Purple
         'background-4': '#FFE0CA', // Light Orange
         'background-5': '#FAF3F1', // Off-white
-        'text-1': '#1A1A1A', // Black
+        'text-1': '#070707', // Black
+        'text-2': '#1A1A1A', // Black
       },
       fontFamily: {
         header: ['Poppins', 'sans-serif'],

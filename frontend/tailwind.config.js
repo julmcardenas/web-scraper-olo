@@ -7,10 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        'background-1': '#B57AFF',
-        'background-2': '#FAF3F1',
-        'background-3': '#F3EAFF',
-        'background-4': '#FFE0CA',
+        'background-1': '#B57AFF', // Dark Purple
+        'background-2': '#FAF3F1', // Light Pink
+        'background-3': '#F3EAFF', // Light Purple
+        'background-4': '#FFE0CA', // Light Orange
+        'background-5': '#FAF3F1', // Off-white
+        'text-1': '#1A1A1A', // Black
       },
       fontFamily: {
         header: ['Poppins', 'sans-serif'],

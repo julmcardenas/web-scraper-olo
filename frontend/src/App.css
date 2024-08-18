@@ -1,6 +1,10 @@
 #root {
   margin: 0 auto;
   text-align: center;
+  --background-1: #B57AFF;
+  --background-2: #FAF3F1;
+  --background-3: #F3EAFF;
+  --background-4: #FFE0CA; /* Light Orange */
 }
 
 body {
@@ -12,6 +16,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* app.css */
+
+.nav-placeholder {
+  height: 80px; /* Default height */
+  background-color: var(--background-5); /* Ensure color is defined */
+  width: 100%;
+}
 
 /* Styles for Landing Container */
 .landing-container {
@@ -27,44 +37,136 @@ h1, h2, h3, h4, h5, h6 {
 .landing-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
   border: 2px solid red;
   border-radius: 8px;
 }
 
-/* Styles for Search Bar Container */
-.search-bar-button {
+/* Styles for Search Section */
+.search-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 100%;
-  max-width: 230px; 
-  border: 3px solid #000;
-  border-radius: 0px;
-  padding: 10px;
-  font-size: 34px;
+  max-width: 860px;
+  border: 1px solid #000;
+  margin-right: 0px;
 }
 
-.search-bar-container {
+
+/* Styles for Search Section */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  height: 100%; /* Ensure it takes up full height of its parent */
   width: 100%;
-  max-width: 805px; /* Adjust width as needed */
+}
+
+/* Styles for Search Bar Container */
+.search-bar-container {
   display: flex;
   flex-direction: row;
+  align-items: center; /* Align items vertically within the container */
+  justify-content: center; /* Center items horizontally within the container */
+  height: 96px;
+  width: 835px; /* Adjust max-width as needed */
+  border: 2px solid red; /* Optional: Border for visual debugging */
+}
+
+/* Other styles */
+.search-bar-button {
+  height: 100%;
+  width: 230px; 
+  border: 3px solid #000;
+  border-right: 0;
+  border-radius: 0;
+  font-size: 32px;
+  font-weight: 550;
+  background-color: var(--background-4);
 }
 
 .search-bar-field {
-  width: 100%;
-  max-width: 530px; /* Adjust width as needed */
+  height: 100%;
+  width: 575px;
   display: flex;
   align-items: center;
 }
 
-/* Styles for Search Input */
 .search-input {
+  height: 100%;
   flex: 1;
-  padding: 10px;
+  padding: 30px;
   border: 3px solid #000;
-  font-size: 34px;
+  font-size: 32px;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 860px;
+  max-height: 500px;
+  border: 1px solid #000;
+}
+
+
+/* Mockup Section */
+.mockup-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  max-height: 500px;
+  border: 1px solid #000;
+}
+
+.mockup {
+  width: 100%; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure image fits within the box while maintaining aspect ratio */
+  max-width: 100%; /* Ensure image does not exceed container width */
+  max-height: 100%; /* Ensure image does not exceed container height */
+}
+
+
+
+
+
+
+/* Media Query for Devices Smaller than 1024px */
+@media (max-width: 1024px) {
+  .nav-placeholder {
+    height: 80px; /* Default height */
+    background-color: var(--background-5); /* Ensure color is defined */
+    width: 100%;
+  }
+  
+  .search-bar-container {
+    height: 80px; /* Reduced height for smaller screens */
+    width: 100%;
+    max-width: 600px; /* Adjusted width */
+  }
+
+  .search-bar-button {
+    height: 80px; /* Reduced height */
+    max-width: 180px; /* Adjusted width */
+    font-size: 24px; /* Smaller font size */
+    justify-content: center;
+  }
+
+  .search-bar-field {
+    height: 80px; /* Reduced height */
+    max-width: 400px; /* Adjusted width */
+  }
+
+  .search-input {
+    height: 80px; /* Reduced height */
+    font-size: 24px; /* Smaller font size */
+  }
 }

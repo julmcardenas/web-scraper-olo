@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-content{
   max-width: 100%;
-  max-height: 450px; /* Set a maximum height */
+  max-height: 90%; /* Set a maximum height */
   overflow-y: auto;
   overflow-x: hidden;
   white-space: normal; 

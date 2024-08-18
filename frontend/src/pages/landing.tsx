@@ -1,6 +1,6 @@
 import { KeyboardEvent, useState } from 'react';
 import Navbar from "../components/NavBar";
-import "../app.css";
+// import "../App.css";
 import mockupImage from '../assets/Mockup.png';
 import { MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';

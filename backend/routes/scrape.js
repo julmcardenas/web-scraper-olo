@@ -7,8 +7,8 @@ const { YoutubeTranscript } = require("youtube-transcript");
 const { model } = require("mongoose");
 require("dotenv").config();
 
-const YOUTUBE_KEY = 'AIzaSyDD1Ez4qo38JN2kqxogWVET-pO9lcVsrb0'
-const GEMINI_KEY = 'AIzaSyBnTF9d4HRlNwRczA2H8oooefXcZ6OfLQ4'
+const YOUTUBE_KEY = process.env.YOUTUBE_KEY;
+const GEMINI_KEY = process.env.GEMINI_KEY;
 const client = new GoogleGenerativeAI(GEMINI_KEY);
 async function fetchYouTubeVideos(productName, numResults) {
   const searchQuery = `${productName} review`;

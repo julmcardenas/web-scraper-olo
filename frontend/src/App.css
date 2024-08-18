@@ -135,9 +135,46 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+/* Component Styling */
 
 
+/* Cards */
+.card {
+  border: 3px solid #000;
+  border-radius: 3px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-height: 80vh;
+}
 
+.card-header {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.card-content {
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: normal; 
+  word-wrap: break-word;
+  text-align: justify; 
+  hyphens: auto;
+}
+
+/* Videos */
+
+.videoframe-main {
+  border: 3px solid #000;
+  overflow: hidden; /* Ensures content doesn't overflow the container */
+  aspect-ratio: 16 / 9; /* Maintains a 16:9 aspect ratio */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+}
 
 /* Media Query for Devices Smaller than 1024px */
 @media (max-width: 1024px) {

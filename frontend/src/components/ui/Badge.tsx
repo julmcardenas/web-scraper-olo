@@ -1,7 +1,7 @@
 import React from "react";
 
 const Badge = ({ variant = "primary", className = "", children }) => {
-  const baseStyles = "inline-flex items-center px-2.5 py-0.5 rounded-full font-medium";
+  const baseStyles = "inline-flex items-center px-5.5 py-0.5 rounded-full font-medium";
   const variantStyles = {
     primary: "bg-blue-500 text-white",
     secondary: "bg-gray-500 text-white",

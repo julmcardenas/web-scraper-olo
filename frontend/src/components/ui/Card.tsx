@@ -1,11 +1,15 @@
 // Card Component
 export const Card = ({ children }) => {
-  return <div className="border border-black bg-[#e0d4ff] h-full ">{children}</div>;
+  return (
+    <div 
+      className="card bg-background-4">{children}
+    </div>
+  );
 };
 
 // CardHeader Component
 export const CardHeader = ({ children }) => {
-  return <div className="pb-4 mb-4 ">{children}</div>;
+  return <div className="card-header mb-4 ">{children}</div>;
 };
 
 // CardTitle Component
@@ -15,5 +19,5 @@ export const CardTitle = ({ children, className }) => {
 
 // CardContent Component
 export const CardContent = ({ children }) => {
-  return <div className="text-gray-700">{children}</div>;
+  return <div className="card-content text-gray-700">{children}</div>;
 };

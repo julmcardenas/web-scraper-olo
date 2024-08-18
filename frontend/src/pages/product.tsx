@@ -116,7 +116,7 @@ const mock_data = [
 ]
 
 export default function Product() {
-    let { id } = useParams();
+    const { id } = useParams();
     const [productReview, setProductReview] = useState<ProductReview | null>(null);
 
 

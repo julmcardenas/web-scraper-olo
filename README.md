@@ -1,7 +1,3 @@
-Here’s the README written in Markdown format:
-
----
-
 # Video and Product Summary Scraper
 
 ## Overview
@@ -80,7 +76,3 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-This Markdown README is structured to provide clear and concise information about your application, its features, and how to use it. You can replace placeholder links and names with your actual project details.

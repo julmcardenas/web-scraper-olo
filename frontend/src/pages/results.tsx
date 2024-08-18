@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
@@ -51,20 +52,47 @@ export default function Results() {
       </svg>
     );
   }
+
+  useEffect(() => {
+    const cardContent = document.querySelectorAll(".card-content");
+
+    function adjustPaddingOnOverflow() {
+      cardContent.forEach((element) => {
+        if (element.scrollHeight > element.clientHeight) {
+          element.style.paddingRight = "8px"; // Increase padding when overflow occurs
+        } else {
+          element.style.paddingRight = "14px"; // Reset padding if no overflow
+        }
+      });
+    }
+
+    // Initial check
+    adjustPaddingOnOverflow();
+
+    // Re-check on window resize
+    window.addEventListener("resize", adjustPaddingOnOverflow);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", adjustPaddingOnOverflow);
+    };
+  }, []); // Empty dependency array ensures this runs only on mount
+
   return (
     <>
-      <div className="result-container w-screen min-h-screen bg-[#f7f3f0] flex flex-col items-center p-8">
-        <main className="result-grid w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="result-container w-screen min-h-screen bg-[rgb(247,243,240)] flex flex-col items-center p-5">
+        <main className="result-grid w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="result-top-2 col-span-1 row-span-1">
+            <h1 className="text-3xl font-bold text-black">
+              {" "}
+              2020 Macbook Air {title}
+            </h1>
 
-
-          <div className="col-span-1 row-span-1">
-            <h1 className="text-3xl font-bold text-black">{title}</h1>
-
-            <div className="videoframe-container">
+            <div className="videoframe-container relative ">
               {videos[0] ? (
                 <div
                   key={videos[0].url}
-                  className="videoframe-main cursor-pointer"
+                  className="videoframe-main relative cursor-pointer"
                   style={{
                     backgroundImage: `url(${videos[0].thumbnail})`,
                   }}
@@ -77,94 +105,82 @@ export default function Results() {
               )}
             </div>
 
-            <div className="score-container border-3 border-dotted border-background-6 mt-4 p-4 h-full">
+            <div className="score-container border-3 border-dotted border-background-6 mt-4 p-4">
               <div className="score-text-box">
-                <h1 className="text-4xl font-bold text-black">
-                  This product scores...{" "}
+                <h1 className="text-2xl font-bold text-black">
+                  Reviewpal scores this...{" "}
                 </h1>
                 <div className="mt-4 justify-center">
                   <Badge
                     variant="success"
-                    className="font-extrabold text-8xl p-8"
+                    className="font-extrabold text-6xl p-8"
                   >
                     {score}
                   </Badge>
                 </div>
-                <h1 className="text-2xl font-bold text-text-75 mt-2">
+                <h1 className="text-xl font-bold text-text-75 mt-2">
                   Recommended
                 </h1>
               </div>
             </div>
           </div>
 
-
           <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Our Verdict</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="card verdict bg-background-7 border-[3px]">
+              <div className="card-header bg-background-2 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
+                <h2 className="text-lg font-bold text-black">Our Verdict</h2>
+              </div>
+              <div className="card-content text-1">
                 <p>{review}</p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">
-                  Check out the videos:
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent>
+            <div className="card watched bg-background-7 border-[3px]">
+              <div className="card-header bg-background-4 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
+                <h2 className="text-lg font-bold text-black">
+                  We watched these:
+                </h2>
+              </div>
+              <div className="card-content videos">
                 {videos.map((video, index) => (
                   <div
                     key={index}
+                    className="videoframe-thumbnail"
                     style={{
-                      aspectRatio: "500/300",
-                      objectFit: "cover",
-                      height: "300",
-                      width: "500",
-                      padding: "1em",
-                      borderRadius: "1em",
-                      border: "1px solid black",
-                      cursor: "pointer",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      backgroundImage: `url(${video?.thumbnail})`, // Optional: Set a background thumbnail
+                      border: "1px solid #000",
+                      borderRadius: "2px",
+                      backgroundImage: `url(${video?.thumbnail})`,
                     }}
                     onClick={() =>
                       window.open(video.link, "_blank", "noopener,noreferrer")
                     }
                   ></div>
                 ))}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
 
-
           <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Pros</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="list-disc pl-4">
+            <div className="card bg-background-10">
+              <div className="card-header bg-background-9 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
+                <h2 className="text-lg font-bold text-black">Pros</h2>
+              </div>
+              <div className="card-content text-1">
+                <ul className="list-disc pl-4 w-full max-w-lg">
                   {pros.map((pro, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <CheckIcon className="text-green-600" />
+                    <li key={index} className="flex items-center space-x-2">
+                      <CheckIcon className="text-green-600 text-sm" />
                       <span>{pro}</span>
-                    </div>
+                    </li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">Cons</CardTitle>
-              </CardHeader>
-              <CardContent>
+              </div>
+            </div>
+            <div className="card bg-background-10">
+              <div className="card-header bg-background-8 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
+                <h2 className="text-lg font-bold text-black">Cons</h2>
+              </div>
+              <div className="card-content cons">
                 <ul className="list-disc pl-4">
                   {cons.map((con, index) => (
                     <div key={index} className="flex items-center space-x-2">
@@ -173,18 +189,19 @@ export default function Results() {
                     </div>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
+
           <div className="col-span-1 row-span-3">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-bold">
+            <div className="card bg-background-4">
+              <div className="card-header bg-background-2 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
+                <h2 className="text-lg font-bold text-black">
                   What people are saying
-                </CardTitle>
-              </CardHeader>
-              <CardContent></CardContent>
-            </Card>
+                </h2>
+              </div>
+              <div className="card-content text-1"></div>
+            </div>
           </div>
         </main>
       </div>

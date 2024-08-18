@@ -9,11 +9,15 @@ export default {
     extend: {
       colors: {
         'background-1': '#B57AFF', // Dark Purple
-        'background-2': '#FAF3F1', // Light Pink
+        'background-2': '#CCACF5', // Light Pink
         'background-3': '#F3EAFF', // Light Purple
         'background-4': '#FFE0CA', // Light Orange
         'background-5': '#FAF3F1', // Off-white
         'background-6': '#b0b0b0', // Bone Grey
+        'background-7': '#FFFFFF', // White
+        'background-8': '#F45156', // Red
+        'background-9': '#90EE90', // Green
+        'background-10': '##efefef', // Light Grey
         'text-1': '#070707', // Black
         'text-2': '#161616', // Slightly darker black
         'text-90': '#B57AFF', // Purple - Popular

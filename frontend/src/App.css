@@ -137,29 +137,75 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Component Styling */
 
+/* Grid System */
+.result-top-2 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Specific containers */
+
+.score-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Cards */
 .card {
   border: 3px solid #000;
   border-radius: 3px;
-  padding: 1.5rem;
   border-radius: 10px;
-  max-height: 80vh;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 1);
 }
 
 .card-header {
+  width: 100%;
   font-size: 24px;
   font-weight: 600;
+  border: 3px solid #000;
 }
 
-.card-content {
+.card-content{
   max-width: 100%;
+  max-height: 450px; /* Set a maximum height */
   overflow-y: auto;
   overflow-x: hidden;
   white-space: normal; 
   word-wrap: break-word;
   text-align: justify; 
-  hyphens: auto;
+  hyphens: auto; 
+  padding: 0px 14px 14px 14px;
+  margin-right: 8px;
+  margin-top: 14px;
+}
+
+.card-content.videos {
+  margin-right: 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 0px;
+}
+
+.card-content::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.card-content::-webkit-scrollbar-track {
+  background: #transparent; 
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: #6e6e6e; 
+  border-radius: 6px; 
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
 
 /* Videos */
@@ -175,6 +221,22 @@ h1, h2, h3, h4, h5, h6 {
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
 }
+
+.videoframe-thumbnail {
+  margin-bottom: 1rem;
+  border: 3px 0px 0px 0px solid #000;
+  overflow: hidden; /* Ensures content doesn't overflow the container */
+  aspect-ratio: 16 / 9; /* Maintains a 16:9 aspect ratio */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover; /* Ensures the background image covers the entire container */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  max-width: 100%; /* Ensures the width does not exceed its parent container */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
 
 /* Media Query for Devices Smaller than 1024px */
 @media (max-width: 1024px) {

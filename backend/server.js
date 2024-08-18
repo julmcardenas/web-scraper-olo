@@ -35,6 +35,8 @@ app.use(
     allowedHeaders: "Content-Type,Authorization", // Allow specific headers
   })
 );
+// allow OPTIONS on all resources
+app.options("*", cors());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));

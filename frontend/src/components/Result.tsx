@@ -198,7 +198,7 @@ export default function Result({ pros, cons, score, review, videos }) {
             <CardHeader>
               <CardTitle className="text-lg font-bold">What people are saying</CardTitle>
             </CardHeader>
-            <CardContent>
+            {/* <CardContent> */}
               {/* <p>
                 Our research shows people overall like enjoy the new m1 chip for everyday use, this MacBook still holds
                 up in 2024 as a solid choice for programmers, the etc... (summary from the comments)...
@@ -213,7 +213,7 @@ export default function Result({ pros, cons, score, review, videos }) {
                   <li>High Price point</li>
                 </ul>
               </p> */}
-            </CardContent>
+            {/* </CardContent> */}
           </Card>
         </div>
       </main>

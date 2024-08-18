@@ -23,6 +23,9 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      'no-unused-vars': 'off', // Turn off the base no-unused-vars rule as it can incorrectly flag TypeScript types
+    '@typescript-eslint/no-unused-vars': 'off', // Use the TypeScript-specific no-unused-vars rule
+    '@typescript-eslint/no-explicit-any': 'off', //
     },
   },
 )

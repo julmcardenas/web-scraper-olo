@@ -14,7 +14,7 @@ import Navbar from "../components/NavBar";
 
 export default function Results() {
   const { state } = useLocation();
-  const { pros, cons, score, review, videos, title } = state;
+  const { productName, pros, cons, score, review, videos, comments } = state;
 
   function CheckIcon(props) {
     return (
@@ -101,10 +101,11 @@ export default function Results() {
   return (
     <>
       <div className="result-container w-screen min-h-screen bg-[rgb(247,243,240)] flex flex-col items-center p-5">
-        <main className="result-grid w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4">
+        <main className="result-grid w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4 mt-[90px]">
           <div className="result-top-2 col-span-1 row-span-1">
-            <h1 className="text-3xl font-bold text-black">{title}</h1>
-
+            <h1 className="text-3xl font-bold text-black">
+              Product: {productName ? productName : "Loading name..."}
+            </h1>
             <div className="videoframe-container relative ">
               {videos[0] ? (
                 <div
@@ -235,7 +236,25 @@ export default function Results() {
               <div className="card-header bg-background-2 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
                 <h2 className="text-lg font-bold text-black">What the people have to say</h2>
               </div>
-              <div className="card-content card-notes">
+              <div className="card-content p-[14px]">
+                <div className="comments-container space-y-4">
+                  {comments && comments.length > 0 ? (
+                    comments.map((comment, index) => (
+                      <div
+                        key={index}
+                        className="comment p-4 bg-gray-100 rounded-md"
+                      >
+                        <p className="text-md text-gray-800">
+                          {comment ? comment : "No comment available"}
+                        </p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-md text-gray-500 text-center">
+                      No comments available for this product.
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>

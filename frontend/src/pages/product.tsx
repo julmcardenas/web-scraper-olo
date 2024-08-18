@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card"
 import Badge from "../components/ui/Badge";
 import Navbar from "../components/NavBar";
 import axios from "axios";
-import "../app.css";
+// import "../app.css";
 
 interface Video {
     title: string;

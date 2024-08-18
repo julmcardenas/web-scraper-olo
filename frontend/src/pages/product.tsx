@@ -88,7 +88,7 @@ export default function Product() {
     if (!productReview) {
         return (
             <>
-                <Navbar />
+                <Navbar isLoggedIn={false}/>
                 <div className="flex items-center justify-center min-h-screen">
                     <h1 className="text-3xl">404: Product not found</h1>
                 </div>
@@ -116,7 +116,7 @@ export default function Product() {
 
     return (
         <>
-            <Navbar />
+            <Navbar isLoggedIn={false}/>
             <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4">
                 <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="col-span-1 row-span-1">

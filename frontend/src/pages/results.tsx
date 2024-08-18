@@ -59,7 +59,7 @@ export default function Results() {
     const cardContent = document.querySelectorAll(".card-content");
 
     function adjustPaddingOnOverflow() {
-      cardContent.forEach((element) => {
+      cardContent.forEach((element:HTMLElement) => {
         if (element.scrollHeight > element.clientHeight) {
           element.style.paddingRight = "8px"; // Increase padding when overflow occurs
         } else {
@@ -260,7 +260,7 @@ export default function Results() {
           </div>
         </main>
       </div>
-      <Navbar />
+      <Navbar isLoggedIn={false}/>
     </>
   );
 }

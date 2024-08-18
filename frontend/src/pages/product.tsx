@@ -71,7 +71,7 @@ export default function Product() {
     useEffect(() => {
         const fetchProductReview = async () => {
             try {
-                const response = await axios.get(`http://localhost:5001/product/${id}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/product/${id}`);
                 if (response.data.message) {
                     setProductReview(response.data.message[0]);
                 } else {

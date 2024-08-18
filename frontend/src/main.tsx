@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import "./index.css";
 import Search from "./pages/search";
 import SearchHistory from "./pages/history";
+import Landing from "./pages/landing";
 import Trending from "./pages/trending";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/trending",
     element: <Trending />,
+  },
+  {
+    path: "/landing",
+    element: <Landing />,
   },
 ]);
 

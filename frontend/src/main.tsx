@@ -9,7 +9,7 @@ import SearchHistory from "./pages/history";
 import Landing from "./pages/landing";
 import Trending from "./pages/trending";
 import Results from "./pages/results";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, BrowserRouter as Router, Routes, Route  } from "react-router-dom";
 import Product from "./pages/product.tsx";
 import Recent from "./pages/recent.tsx";
 
@@ -58,7 +58,19 @@ if (!PUBLISHABLE_KEY) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router} /> */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/history" element={<SearchHistory />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/recent" element={<Recent />} />
+        </Routes>
+      </Router>
     </ClerkProvider>
   </StrictMode>
 );

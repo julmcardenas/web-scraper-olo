@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/Card"
 import Badge from "../components/ui/Badge";
 import Navbar from "../components/NavBar";
 import axios from "axios";
+// import "../app.css";
 
 interface Video {
     title: string;
@@ -21,6 +22,7 @@ interface ProductReview {
     userId: string;
     score: number;
     videos: Video[];
+    comments: string[]; // Added comments field
 }
 
 function CheckIcon(props: any) {
@@ -62,109 +64,74 @@ function XIcon(props: any) {
     );
 }
 
-const mock_data = [
-    {
-        _id: '1',
-        product: "Noise-Cancelling Headphones",
-        review:
-            "High-quality noise-cancelling headphones with advanced audio technology for an immersive listening experience.",
-        pros: [
-            "Excellent noise-cancellation performance",
-            "Comfortable and adjustable design",
-            "Long battery life",
-            "Wireless connectivity",
-        ],
-        cons: ["Expensive compared to regular headphones", "May not be suitable for sports or outdoor activities"],
-        videos: [{
-            title: "Video 1",
-            thumbnail: "https://via.placeholder.com/500x300",
-            link: "https://www.youtube.com/watch?v=abcdefghijk",
-        }, {
-            title: "Video 2",
-            thumbnail: "https://via.placeholder.com/500x300",
-            link: "https://www.youtube.com/watch?v=lmnopqrst",
-        }],
-        date: '2021-09-01',
-        userId: '1',
-        score: 4.5,
-    },
-    {
-        _id: '2',
-        product: "Smartphone",
-        review:
-            "High-quality smartphone with advanced features for an immersive user experience.",
-        pros: [
-            "High-resolution display",
-            "Long battery life",
-            "Fast performance",
-            "High-quality camera",
-        ],
-        cons: ["Expensive compared to regular phones", "May not be suitable for budget-conscious users"],
-        videos: [{
-            title: "Video 1",
-            thumbnail: "https://via.placeholder.com/500x300",
-            link: "https://www.youtube.com/watch?v=abcdefghijk",
-        }, {
-            title: "Video 2",
-            thumbnail: "https://via.placeholder.com/500x300",
-            link: "https://www.youtube.com/watch?v=lmnopqrst",
-        }],
-        date: '2021-09-02',
-        userId: '1',
-        score: 4.0,
-    },
-]
-
 export default function Product() {
     const { id } = useParams();
     const [productReview, setProductReview] = useState<ProductReview | null>(null);
 
-
     useEffect(() => {
-        // Fetch the search history data from the API
-        const fetchHistory = async () => {
+        const fetchProductReview = async () => {
             try {
                 const response = await axios.get(`http://localhost:5001/product/${id}`);
-                console.log('response', response);
-                // if no such product exists, then return 404 screen
-                if (!response.data.message) {
+                if (response.data.message) {
+                    setProductReview(response.data.message[0]);
+                } else {
                     setProductReview(null);
-                    return;
                 }
-                console.log('response-front', response);
-                setProductReview(response.data.message[0]);
             } catch (error) {
-                console.error('Error fetching search history:', error);
+                console.error('Error fetching product review:', error);
             }
         };
 
-        fetchHistory();
-
-    }, []);
+        fetchProductReview();
+    }, [id]);
 
     if (!productReview) {
         return (
             <>
-                <Navbar isLoggedIn={false} />
-                <div className="flex items-center justify-center h-screen"><h1 className="text-3xl">404: Product not found</h1></div>
+                <Navbar isLoggedIn={false}/>
+                <div className="flex items-center justify-center min-h-screen">
+                    <h1 className="text-3xl">404: Product not found</h1>
+                </div>
             </>
         );
     }
 
+    // Function to determine the badge text and color based on the score
+    const getBadgeDetails = (score: number) => {
+        if (score <= 49) {
+            return { text: "Not recommended", color: "text-0" };
+        } else if (score >= 50 && score <= 59) {
+            return { text: "Unpopular", color: "text-50" };
+        } else if (score >= 60 && score <= 74) {
+            return { text: "Decent", color: "text-60" };
+        } else if (score >= 75 && score <= 89) {
+            return { text: "Recommended", color: "text-75" };
+        } else if (score >= 90 && score <= 100) {
+            return { text: "Popular!", color: "text-90" };
+        }
+        return { text: "", color: "text-black" }; // Default case
+    };
+
+    const { text: badgeText, color: badgeColor } = getBadgeDetails(productReview.score);
 
     return (
         <>
-            <Navbar isLoggedIn={false} />
-            <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4 mt-8">
+            <Navbar isLoggedIn={false}/>
+            <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4">
                 <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="col-span-1 row-span-1">
                         <div className="text-center">
                             <h1 className="text-3xl font-bold text-black">{productReview.product}</h1>
                             <div className="mt-2 flex justify-center items-center space-x-2">
-                                <Badge variant="secondary" className="text-lg">
+                                <Badge
+                                    variant="success"
+                                    className={`font-extrabold text-6xl p-8 ${badgeColor}`}
+                                >
                                     {productReview.score}
                                 </Badge>
-                                <span className="text-lg font-semibold text-green-600">Great</span>
+                                <span className={`text-xl font-bold mt-2 ${badgeColor}`}>
+                                    {badgeText}
+                                </span>
                             </div>
                             <div className="mt-4">
                                 {productReview.videos[0] ? (
@@ -195,7 +162,6 @@ export default function Product() {
                             <CardHeader>
                                 <CardTitle className="text-lg font-bold">Check out the videos:</CardTitle>
                             </CardHeader>
-
                             <CardContent>
                                 {productReview.videos.map((video, index) => (
                                     <div
@@ -203,15 +169,15 @@ export default function Product() {
                                         style={{
                                             aspectRatio: "500/300",
                                             objectFit: "cover",
-                                            height: "300",
-                                            width: "500",
+                                            height: "300px",
+                                            width: "500px",
                                             padding: "1em",
                                             borderRadius: "1em",
                                             border: "1px solid black",
                                             cursor: "pointer",
                                             backgroundSize: "cover",
                                             backgroundPosition: "center",
-                                            backgroundImage: `url(${video?.thumbnail})`, // Optional: Set a background thumbnail
+                                            backgroundImage: `url(${video?.thumbnail})`,
                                         }}
                                         onClick={() => window.open(video.link, "_blank", "noopener,noreferrer")}
                                     ></div>
@@ -227,10 +193,10 @@ export default function Product() {
                             <CardContent>
                                 <ul className="list-disc pl-4">
                                     {productReview.pros.map((pro, index) => (
-                                        <div key={index} className="flex items-center space-x-2">
-                                            <CheckIcon className="text-green-600" />
+                                        <li key={index} className="flex items-center space-x-2">
+                                            <CheckIcon className="text-green-600" style={{ fontSize: "1.25rem", minWidth: "1.25rem", minHeight: "1.25rem" }} />
                                             <span>{pro}</span>
-                                        </div>
+                                        </li>
                                     ))}
                                 </ul>
                             </CardContent>
@@ -242,10 +208,10 @@ export default function Product() {
                             <CardContent>
                                 <ul className="list-disc pl-4">
                                     {productReview.cons.map((con, index) => (
-                                        <div key={index} className="flex items-center space-x-2">
-                                            <XIcon className="text-red-600" />
+                                        <li key={index} className="flex items-center space-x-2">
+                                            <XIcon className="text-red-600" style={{ fontSize: "1.25rem", minWidth: "1.25rem", minHeight: "1.25rem" }} />
                                             <span>{con}</span>
-                                        </div>
+                                        </li>
                                     ))}
                                 </ul>
                             </CardContent>
@@ -256,7 +222,19 @@ export default function Product() {
                             <CardHeader>
                                 <CardTitle className="text-lg font-bold">What people are saying</CardTitle>
                             </CardHeader>
-                            <CardContent>{''}</CardContent>
+                            <CardContent>
+                                <div className="comments-container space-y-4">
+                                    {productReview.comments && productReview.comments.length > 0 ? (
+                                        productReview.comments.map((comment, index) => (
+                                            <div key={index} className="comment p-4 bg-gray-100 rounded-md">
+                                                <p className="text-md text-gray-800">{comment}</p>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p className="text-md text-gray-600">No comments yet</p>
+                                    )}
+                                </div>
+                            </CardContent>
                         </Card>
                     </div>
                 </main>

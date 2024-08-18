@@ -134,9 +134,9 @@ export default function SearchHistory() {
   }
 
   return (
-    <div className=" py-12">
+    <div className="w-screen py-12 ">
       <Navbar isLoggedIn={false} />
-      <h1 className="text-2xl font-bold mb-6 ">Search History</h1>
+      <h1 className="text-2xl font-bold mb-6 mt-16">Search History</h1>
 
       {/* <div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -160,8 +160,8 @@ export default function SearchHistory() {
                 onClick={() => handleProductClick(search)}
               >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium">{search.product}</h3>
+                  <div className="text-left">
+                    <h3 className="font-medium text-clip overflow-hidden truncate">{search.product}</h3>
                     <p className="text-sm text-muted-foreground">{search.date}</p>
                   </div>
                   {'>'}

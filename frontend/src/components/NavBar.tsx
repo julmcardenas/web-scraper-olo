@@ -7,7 +7,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [showSidebar, setShowSidebar] = useState(false);
 
   return (
-    <nav className="bg-indigo-500 p-4 fixed top-0 left-0 w-full z-50">
+    <nav className="bg-background-1 p-4 fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand Name */}
         <div className="text-white text-xl font-bold">

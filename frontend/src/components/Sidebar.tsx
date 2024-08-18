@@ -29,7 +29,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         <div className="flex flex-col space-y-6 my-10	">
           <div className="flex flex-row space-y-8 items-center text-black">
             01
-            <Link to="/search" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded flex-nowrap w-full">
+            <Link to="/" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded flex-nowrap w-full">
               SEARCH REVIEWS
             </Link>
           </div>

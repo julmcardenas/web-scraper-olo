@@ -54,7 +54,7 @@ export default function Trending() {
     try {
       // scrap url or product name
       const body = searchType === 'name' ? { product: search } : { url: search };
-      const response = await axios.post(`http://localhost:5001/scrape/${searchType}`, body);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/scrape/${searchType}`, body);
       const data = response.data;
       console.log("data", data);
       setData(data);
@@ -70,7 +70,7 @@ export default function Trending() {
         data.product = search;
         data.userId = user.id;
         data.date = new Date().toISOString();
-        const res = await axios.post("http://localhost:5001/search", { data, userId: user.id });
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/search`, { data, userId: user.id });
       }
     } catch (err: any) {
       setError(err.message);

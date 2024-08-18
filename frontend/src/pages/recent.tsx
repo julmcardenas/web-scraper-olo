@@ -6,7 +6,7 @@ export default function Recent() {
   const [recentSearches, setRecentSearches] = useState([]);
   useEffect(() => {
     const fetchRecent = async () => {
-      const res = await axios.get("http://localhost:5001/recent/search");
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/recent/search`);
 
       setRecentSearches(res.data);
     };

@@ -48,7 +48,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5001/scrape/name", { product: search });
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/scrape/name`, { product: search });
       const data = response.data;
       console.log("data", data);
       setData(data);
@@ -62,7 +62,7 @@ export default function App() {
         data.product = search;
         data.userId = user.id;
         data.date = new Date().toISOString();
-        const res = await axios.post("http://localhost:5001/search", { data, userId: user.id });
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/search`, { data, userId: user.id });
       }
     } catch (err: any) {
       setError(err.message);

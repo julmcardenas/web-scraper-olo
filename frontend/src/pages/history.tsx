@@ -111,7 +111,7 @@ export default function SearchHistory() {
       console.log('user', user.id);
       const fetchHistory = async () => {
         try {
-          const response = await axios.get(`http://localhost:5001/history/${user.id}`);
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/history/${user.id}`);
           console.log('response-front', response);
           setHistory(response.data.message);
           setSelectedProduct(response.data.message[0]);

@@ -23,7 +23,8 @@ export default {
         'text-90': '#B57AFF', // Purple - Popular
         'text-75': '#22c55e', // Green - Recommended
         'text-60': '#FEDE00', // Yellow - Decent
-        'text-50': '#1A1A1A', // Black - Unpopular
+        'text-50' : '#ff991c', // Orange - Unpopular
+        'text-0': '#1A1A1A', // Black - Not recommended
       },
       fontFamily: {
         header: ['Poppins', 'sans-serif'],

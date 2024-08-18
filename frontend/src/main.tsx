@@ -9,6 +9,7 @@ import SearchHistory from "./pages/history";
 import Trending from "./pages/trending";
 import Results from "./pages/results";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Product from "./pages/product.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/results",
     element: <Results />,
+  },
+  {
+    path: "/product/:id",
+    element: <Product />,
   },
 ]);
 

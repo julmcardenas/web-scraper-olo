@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
@@ -7,6 +7,7 @@ import DataTable from "./components/Table";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import Navbar from "./components/NavBar";
 import Result from "./components/Result";
+import { useNavigate } from "react-router-dom";
 const mock_data = {
   data: {
     url: "https://headstarter.co/",
@@ -21,6 +22,7 @@ const mock_data = {
 export default function App() {
   const [searchString, setSearchString] = useState("");
   const [data, setData] = useState(null);
+  const navigation = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -59,6 +61,9 @@ export default function App() {
       console.log("data", data);
       setData(data);
       setLoading(false);
+      navigation("/results", {
+        state: { ...data },
+      });
       // TODO: store data in database
     } catch (err: any) {
       setError(err.message);
@@ -96,7 +101,7 @@ export default function App() {
           {error && <div className="bg-red-500 text-red-50 p-4 rounded-md mb-8">{error}</div>}
         </div>
 
-        {data && <Result {...data} />}
+        {/* {data && <Result {...data} />} */}
         {/* {openModal && modalData && (
           // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           //   <div className="bg-white p-6 rounded-md shadow-md text-gray-600">

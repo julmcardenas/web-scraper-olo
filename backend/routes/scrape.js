@@ -37,12 +37,17 @@ async function fetchVideoTranscripts(videoIds) {
   const transcripts = [];
 
   for (const videoId of videoIds) {
-    let textTranscript = "";
-    const transcript = await YoutubeTranscript.fetchTranscript(videoId);
-    for (t of transcript) {
-      textTranscript += t.text + " ";
+    try {
+      let textTranscript = "";
+      const transcript = await YoutubeTranscript.fetchTranscript(videoId);
+      for (t of transcript) {
+        textTranscript += t.text + " ";
+      }
+      transcripts.push(textTranscript);
+    } catch (error) {
+      transcripts.push("");
     }
-    transcripts.push(textTranscript);
+    
   }
 
   return transcripts;

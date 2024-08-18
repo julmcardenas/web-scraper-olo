@@ -3,6 +3,12 @@ import Navbar from "../components/NavBar";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
+interface Video {
+  title: string;
+  thumbnail: string;
+  link: string;
+}
+
 interface ProductReview {
   _id: string;
   product: string;
@@ -12,43 +18,59 @@ interface ProductReview {
   cons: string[];
   userId: string;
   score: number;
-  videos: string[];
+  videos: Video[];
 }
 
 const mock_data = [
   {
-    _id: '1',
-    product: "Noise-Cancelling Headphones",
-    review:
-      "High-quality noise-cancelling headphones with advanced audio technology for an immersive listening experience.",
-    pros: [
-      "Excellent noise-cancellation performance",
-      "Comfortable and adjustable design",
-      "Long battery life",
-      "Wireless connectivity",
-    ],
-    cons: ["Expensive compared to regular headphones", "May not be suitable for sports or outdoor activities"],
-    videos: ["https://www.youtube.com/watch?v=abcdefghijk", "https://www.youtube.com/watch?v=lmnopqrstuv"],
-    date: '2021-09-01',
-    userId: '1',
-    score: 4.5,
+      _id: '1',
+      product: "Noise-Cancelling Headphones",
+      review:
+          "High-quality noise-cancelling headphones with advanced audio technology for an immersive listening experience.",
+      pros: [
+          "Excellent noise-cancellation performance",
+          "Comfortable and adjustable design",
+          "Long battery life",
+          "Wireless connectivity",
+      ],
+      cons: ["Expensive compared to regular headphones", "May not be suitable for sports or outdoor activities"],
+      videos: [{
+          title: "Video 1",
+          thumbnail: "https://via.placeholder.com/500x300",
+          link: "https://www.youtube.com/watch?v=abcdefghijk",
+      }, {
+          title: "Video 2",
+          thumbnail: "https://via.placeholder.com/500x300",
+          link: "https://www.youtube.com/watch?v=lmnopqrst",
+      }],
+      date: '2021-09-01',
+      userId: '1',
+      score: 4.5,
   },
   {
-    _id: '2',
-    product: "Smartphone",
-    review:
-      "High-quality smartphone with advanced features for an immersive user experience.",
-    pros: [
-      "High-resolution display",
-      "Long battery life",
-      "Fast performance",
-      "High-quality camera",
-    ],
-    cons: ["Expensive compared to regular phones", "May not be suitable for budget-conscious users"],
-    videos: ["https://www.youtube.com/watch?v=abcdefghijk", "https://www.youtube.com/watch?v=lmnopqrstuv"],
-    date: '2021-09-02',
-    userId: '1',
-    score: 4.0,
+      _id: '2',
+      product: "Smartphone",
+      review:
+          "High-quality smartphone with advanced features for an immersive user experience.",
+      pros: [
+          "High-resolution display",
+          "Long battery life",
+          "Fast performance",
+          "High-quality camera",
+      ],
+      cons: ["Expensive compared to regular phones", "May not be suitable for budget-conscious users"],
+      videos: [{
+          title: "Video 1",
+          thumbnail: "https://via.placeholder.com/500x300",
+          link: "https://www.youtube.com/watch?v=abcdefghijk",
+      }, {
+          title: "Video 2",
+          thumbnail: "https://via.placeholder.com/500x300",
+          link: "https://www.youtube.com/watch?v=lmnopqrst",
+      }],
+      date: '2021-09-02',
+      userId: '1',
+      score: 4.0,
   },
 ]
 
@@ -106,7 +128,7 @@ export default function SearchHistory() {
   if (!user || !isSignedIn) {
     return (<>
       <Navbar isLoggedIn={false} />
-      <div>Sign in to view Search History</div>
+      <div className="flex items-center justify-center h-screen"><h1 className="text-3xl">Sign in to view Search History</h1></div>
     </>
     )
   }
@@ -184,7 +206,7 @@ export default function SearchHistory() {
                     rel="noopener noreferrer"
                     className="text-primary hover:underline"
                   >
-                    {video}
+                    {video.link}
                   </a>
                 ))}
               </div>

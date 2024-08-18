@@ -11,8 +11,8 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
       <div className="container mx-auto flex justify-between items-center">
         {/* Brand Name */}
         <div className="text-white text-xl font-bold">
-          <Link to="/" className="text-white px-3 py-2 rounded hover:text-white">
-            ReviewPal
+          <Link to="/" className="text-white text-2xl px-3 font-bold py-2 rounded hover:text-white">
+            reviewpal
           </Link>
         </div>
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import DataTable from "./components/Table";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import Navbar from "./components/NavBar";
 
 const mock_data = {
@@ -19,23 +19,15 @@ const mock_data = {
 };
 
 export default function App() {
+  const { isLoaded, isSignedIn, user } = useUser();
   const [url, setUrl] = useState("");
+  const [search, setSearch] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [modalData, setModalData] = useState({ url: null, description: null, headings: [], links: [] });
 
-  useEffect(() => {
-    //get data
-    // setData(mock_data.data)
-
-    async function getData() {
-      const response = await axios.get("http://localhost:5001/");
-      console.log(response.data);
-    }
-    getData();
-  }, []);
   const handleOpen = () => {
     setOpenModal(true);
   };
@@ -48,12 +40,23 @@ export default function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5001/scrape", { url });
-      const data = response.data.data;
-      console.log(data);
-      setData(data);
+      const response = await axios.post("http://localhost:5001/scrape", { product: search });
+      console.log('response', response);
+      const data = response.data;
+      console.log('data', data);
+
+
+      // setData(data);
       setLoading(false);
-      // TODO: store data in database
+
+      // save search data to the database
+      if (isSignedIn && user) {
+        data.product = search;
+        data.userId = user.id;
+        data.date = new Date().toISOString();
+        const res = await axios.post("http://localhost:5001/search", { data, userId: user.id });
+      }
+
     } catch (err: any) {
       setError(err.message);
       setLoading(false);
@@ -70,10 +73,10 @@ export default function App() {
           <form onSubmit={handleSubmit} className="mb-8">
             <div className="flex items-center border rounded-md bg-background">
               <input
-                type="url"
-                placeholder="Enter a URL"
-                value={url}
-                onChange={e => setUrl(e.target.value)}
+                type="text"
+                placeholder="Enter a product name"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
                 className="flex-1 p-3 border-none focus:ring-0"
               />
               <button type="submit" className="px-4 py-3 rounded-r-md">

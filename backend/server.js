@@ -43,17 +43,26 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 // get all search history
 app.get("/", async (req, res) => {
-  const data = req.body
+  const data = req.body;
   const response = await db.collection("search").find({}).toArray();
   res.json({ message: response });
 });
 
+app.get("/recent/search", async (req, res) => {
+  const response = await db
+    .collection("search")
+    .find({})
+    .sort({ timestamp: -1 })
+    .limit(5) // or any number you prefer
+    .toArray();
 
+  res.json(response);
+});
 app.get("/history/:user", async (req, res) => {
   // get search history for user
-  const data = req.body
-  const userId = req.params.user
-  const response = await db.collection("search").find({userId}).toArray();
+  const data = req.body;
+  const userId = req.params.user;
+  const response = await db.collection("search").find({ userId }).toArray();
   res.json({ message: response });
 });
 
@@ -62,7 +71,7 @@ app.post("/search", async (req, res) => {
   const newData = req.body.data;
   try {
     const result = await db.collection("search").insertOne(newData);
-    res.status(201).json({id: result.insertedId}); // Return the newly created document
+    res.status(201).json({ id: result.insertedId }); // Return the newly created document
   } catch (err) {
     res.status(500).json({ error: "Failed to insert data" });
   }
@@ -73,12 +82,14 @@ app.get("/product/:id", async (req, res) => {
   console.log("req.params.id", req.params.id);
   const productId = req.params.id;
   // const response = await db.collection("search").find({ _id: productId }).toArray();
-  const response = await db.collection("search").find({"_id" : new ObjectId(productId)}).toArray();
+  const response = await db
+    .collection("search")
+    .find({ _id: new ObjectId(productId) })
+    .toArray();
   // const print = response
-  console.log(response)
-  res.json({ message: response});
+  console.log(response);
+  res.json({ message: response });
 });
-
 
 app.get("/api/products", (req, res) => {
   console.log("products are");

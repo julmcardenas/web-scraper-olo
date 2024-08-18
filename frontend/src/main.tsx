@@ -10,6 +10,7 @@ import Trending from "./pages/trending";
 import Results from "./pages/results";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Product from "./pages/product.tsx";
+import Recent from "./pages/recent.tsx";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
     path: "/product/:id",
     element: <Product />,
   },
+  {
+    path: "/recent",
+    element: <Recent />,
+  },
 ]);
 
 // Import your publishable key
@@ -48,7 +53,7 @@ if (!PUBLISHABLE_KEY) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </ClerkProvider>
   </StrictMode>
 );

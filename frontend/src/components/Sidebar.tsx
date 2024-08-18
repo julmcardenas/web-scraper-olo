@@ -36,6 +36,12 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
               Search History
             </Link>
           </div>
+          <div className="flex flex-row space-y-4 items-center text-black">
+            04
+            <Link to="/recent" className="text-black hover:bg-blue-700 hover:text-white px-3 py-2 rounded">
+              Recent Search
+            </Link>
+          </div>
         </div>
         <div className="flex-1" onClick={handleClose}></div>
       </div>

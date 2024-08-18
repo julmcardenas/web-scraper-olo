@@ -14,7 +14,7 @@ export default function Recent() {
   }, []);
   return (
     <div>
-      <Navbar />
+      <Navbar isLoggedIn={false}/>
       <div className="text-center mt-10">
         <h1 className="text-3xl font-bold">Recent Searches</h1>
       </div>

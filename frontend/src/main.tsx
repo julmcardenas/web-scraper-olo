@@ -8,6 +8,7 @@ import Search from "./pages/search";
 import SearchHistory from "./pages/history";
 import Landing from "./pages/landing";
 import Trending from "./pages/trending";
+import Results from "./pages/results";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
     element: <Trending />,
   },
   {
+    path: "/results",
+    element: <Results />,
+  },
+  {
     path: "/landing",
     element: <Landing />,
   },
@@ -43,9 +48,7 @@ if (!PUBLISHABLE_KEY) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
+      <RouterProvider router={router}/>
     </ClerkProvider>
   </StrictMode>
 );

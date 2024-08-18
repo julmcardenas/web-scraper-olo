@@ -4,6 +4,7 @@ const cors = require("cors");
 const apiRoutes = require("./routes/scrape");
 const dotenv = require("dotenv");
 const { connectToDb, getDb } = require("./config/db");
+const { ObjectId } = require("mongodb");
 
 // Load environment variables
 dotenv.config();
@@ -68,9 +69,14 @@ app.post("/search", async (req, res) => {
 });
 
 // get product by id
-app.get("/product", async (req, res) => {
-  const response = await db.collection("search").findOne({ _id: req.query.id });
-  res.json({ message: response });
+app.get("/product/:id", async (req, res) => {
+  console.log("req.params.id", req.params.id);
+  const productId = req.params.id;
+  // const response = await db.collection("search").find({ _id: productId }).toArray();
+  const response = await db.collection("search").find({"_id" : new ObjectId(productId)}).toArray();
+  // const print = response
+  console.log(response)
+  res.json({ message: response});
 });
 
 

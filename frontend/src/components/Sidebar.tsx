@@ -26,7 +26,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
   </button>
         
 
-        <div className="flex flex-col space-y-6 my-10	">
+        <div className="flex flex-col space-y-6 my-40	">
           <div className="flex flex-row space-y-8 items-center text-black">
             01
             <Link to="/search" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded flex-nowrap w-full">
@@ -35,18 +35,12 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
           </div>
           <div className="flex flex-row space-y-4 items-center text-black">
             02
-            <Link to="/trending" className="text-black text-2xl font-bold hover:text-background-10 px-3 py-2 rounded">
-              TRENDING 
-            </Link>
-          </div>
-          <div className="flex flex-row space-y-4 items-center text-black">
-            03
             <Link to="/history" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded">
               MY HISTORY
             </Link>
           </div>
           <div className="flex flex-row space-y-4 items-center text-black">
-            04
+            03
             <Link to="/recent" className="text-black text-2xl font-bold  hover:text-background-10 px-3 py-2 rounded">
               LATEST SEARCHES
             </Link>

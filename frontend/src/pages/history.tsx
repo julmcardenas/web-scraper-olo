@@ -106,7 +106,7 @@ export default function SearchHistory() {
   if (!user || !isSignedIn) {
     return (<>
       <Navbar isLoggedIn={false} />
-      <div>Sign in to view Search History</div>
+      <div className="flex items-center justify-center h-screen"><h1 className="text-3xl">Sign in to view Search History</h1></div>
     </>
     )
   }

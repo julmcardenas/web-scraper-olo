@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL
+    origin: "http://localhost:5174", // Replace with your frontend URL
     methods: "GET,POST", // Allow specific HTTP methods
     allowedHeaders: "Content-Type,Authorization", // Allow specific headers
   })
@@ -79,16 +79,16 @@ app.post("/search", async (req, res) => {
 
 // get product by id
 app.get("/product/:id", async (req, res) => {
-  console.log("req.params.id", req.params.id);
-  const productId = req.params.id;
-  // const response = await db.collection("search").find({ _id: productId }).toArray();
-  const response = await db
-    .collection("search")
-    .find({ _id: new ObjectId(productId) })
-    .toArray();
-  // const print = response
-  console.log(response);
-  res.json({ message: response });
+  try {
+    const productId = req.params.id;
+    const response = await db.collection("search").findOne({ _id: new ObjectId(productId) });
+    if (!response) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch product" });
+  }
 });
 
 app.get("/api/products", (req, res) => {

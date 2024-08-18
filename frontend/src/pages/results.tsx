@@ -48,7 +48,7 @@ export default function Results() {
   }
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
       <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4">
         <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1 row-span-1">

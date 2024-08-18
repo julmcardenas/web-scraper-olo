@@ -166,10 +166,20 @@ export default function Results() {
                 <h2 className="text-lg font-bold text-black">Pros</h2>
               </div>
               <div className="card-content text-1">
-                <ul className="list-disc pl-4 w-full max-w-lg">
+                <ul className="list-none pl-4 w-full max-w-lg">
                   {pros.map((pro, index) => (
-                    <li key={index} className="flex items-center space-x-2">
-                      <CheckIcon className="text-green-600 text-sm" />
+                    <li
+                      key={index}
+                      className="checkmarks flex items-start space-x-2 text-left"
+                    >
+                      <CheckIcon
+                        className="text-green-600 flex-shrink-0"
+                        style={{
+                          fontSize: "1.25rem",
+                          minWidth: "1.25rem",
+                          minHeight: "1.25rem",
+                        }}
+                      />
                       <span>{pro}</span>
                     </li>
                   ))}
@@ -181,12 +191,19 @@ export default function Results() {
                 <h2 className="text-lg font-bold text-black">Cons</h2>
               </div>
               <div className="card-content cons">
-                <ul className="list-disc pl-4">
+                <ul className="list-none pl-4 w-full max-w-lg">
                   {cons.map((con, index) => (
-                    <div key={index} className="flex items-center space-x-2">
-                      <XIcon className="text-red-600" />
+                    <li key={index} className="flex items-start space-x-2 text-left">
+                      <XIcon
+                        className="text-red-600 flex-shrink-0"
+                        style={{
+                          fontSize: "1.25rem",
+                          minWidth: "1.25rem",
+                          minHeight: "1.25rem",
+                        }}
+                      />
                       <span>{con}</span>
-                    </div>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -194,7 +211,7 @@ export default function Results() {
           </div>
 
           <div className="col-span-1 row-span-3">
-            <div className="card bg-background-4">
+            <div className="card bg-background-7">
               <div className="card-header bg-background-2 card-header border-t-0 border-l-0 border-r-0 border-b border-b-[3px] border-black border-solid rounded-tl-md rounded-tr-md">
                 <h2 className="text-lg font-bold text-black">
                   What people are saying

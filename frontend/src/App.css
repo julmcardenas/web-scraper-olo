@@ -146,6 +146,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Specific containers */
 
+.checkmarks.li {
+  text-decoration: none;
+}
+
 .score-container {
   flex: 1;
   display: flex;

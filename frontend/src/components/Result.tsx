@@ -46,23 +46,6 @@ export default function Result() {
   }
   return (
     <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4">
-      {/* <header className="w-full max-w-5xl flex items-center justify-between p-4 bg-[#d1a3ff] text-white">
-        <div className="flex items-center space-x-2">
-          <LogInIcon className="w-8 h-8" />
-          <span className="text-xl font-bold">reviewpal</span>
-        </div>
-        <div className="relative w-full max-w-md">
-          <SearchIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <Input
-            type="search"
-            placeholder="Search a product, or enter a YouTube URL."
-            className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#d1a3ff]"
-          />
-        </div>
-        <Button variant="ghost" className="text-white">
-          {/* <MenuIcon className="w-6 h-6" /> */}
-      {/* </Button> */}
-      {/* </header>/*/}
       <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="col-span-1 row-span-1">
           <div className="text-center">

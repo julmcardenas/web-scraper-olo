@@ -3,9 +3,9 @@ import React from "react";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
 import Badge from "./ui/Badge";
-import Card from "./ui/Card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/Card";
 
-export default function Result() {
+export default function Result({ pros, cons, score, review, videos }) {
   function CheckIcon(props) {
     return (
       <svg
@@ -49,105 +49,171 @@ export default function Result() {
       <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="col-span-1 row-span-1">
           <div className="text-center">
-            <h1 className="text-3xl font-bold">2020 Macbook Air Review</h1>
+            <h1 className="text-3xl font-bold text-black">2020 Macbook Air Review</h1>
             <div className="mt-2 flex justify-center items-center space-x-2">
-              <p variant="secondary" className="text-lg">
-                88
-              </p>
+              <Badge variant="secondary" className="text-lg">
+                {score}
+              </Badge>
               <span className="text-lg font-semibold text-green-600">Great</span>
             </div>
             <div className="mt-4">
-              <img
-                src="/placeholder.svg"
-                alt="Macbook Air"
-                className="border border-black"
-                width="500"
-                height="300"
-                style={{ aspectRatio: "500/300", objectFit: "cover" }}
-              />
+              {videos[0] ? (
+                <div
+                  key={videos[0].url}
+                  className="relative aspect-w-5 aspect-h-3 h-[300px] w-[500px] p-4 rounded-lg border border-black cursor-pointer bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${videos[0].thumbnail})`,
+                  }}
+                  onClick={() => window.open(videos[0].url, "_blank", "noopener,noreferrer")}
+                ></div>
+              ) : (
+                <div>No video available</div>
+              )}
             </div>
           </div>
         </div>
         <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card className="border border-black">
-            {/* <CardHeader>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg font-bold">Our Verdict</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>
-                Our research shows people overall enjoy the new M1 chip for everyday use; this MacBook still holds up in
-                2024. Its impressive performance, long battery life, and efficient multitasking capabilities have made
-                it a popular choice among users. The M1 chip's continuing...
-              </p>
-            </CardContent> */}
+              <p>{review}</p>
+            </CardContent>
           </Card>
-          <Card className="border border-black">
-            {/* <CardHeader>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg font-bold">Check out the videos:</CardTitle>
             </CardHeader>
+
             <CardContent>
-              <img
+              {videos.map((video, index) => (
+                <div
+                  key={index}
+                  style={{
+                    aspectRatio: "500/300",
+                    objectFit: "cover",
+                    height: "300",
+                    width: "500",
+                    padding: "1em",
+                    borderRadius: "1em",
+                    border: "1px solid black",
+                    cursor: "pointer",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundImage: `url(${video?.thumbnail})`, // Optional: Set a background thumbnail
+                  }}
+                  onClick={() => window.open(video.url, "_blank", "noopener,noreferrer")}
+                ></div>
+              ))}
+
+              {/* <img
+                    src={videos[0].thumbnail}
+                    alt="Macbook Air"
+                    className="border border-black"
+                    width="500"
+                    height="300"
+                  /> */}
+              {/* // ) : (
+              //   <div>No video available</div>
+              // )}
+
+                // <div key={index} className="flex items-center space-x-2">
+                //   <video width="250" height="150" className="my-2 " controls>
+                //     <source src={video.url} type="video/mp4" title={video.title} />
+                //     Your browser does not support the video tag.
+                //   </video> */}
+              {/* <img
+                    src="/placeholder.svg"
+                    alt="Video thumbnail"
+                    className="border border-black"
+                    width="250"
+                    height="150"
+                    style={{ aspectRatio: "250/150", objectFit: "cover" }}
+                  />
+                  <a href={video.url} className="text-blue-600 underline">
+                    {video.title}
+                  </a> */}
+
+              {/* <img
                 src="/placeholder.svg"
                 alt="Video thumbnail"
                 className="border border-black"
                 width="250"
                 height="150"
                 style={{ aspectRatio: "250/150", objectFit: "cover" }}
-              />
-            </CardContent> */}
+              /> */}
+            </CardContent>
           </Card>
         </div>
         <div className="col-span-1 row-span-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card className="border border-black bg-[#e0d4ff] h-full">
-            {/* <CardHeader>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg font-bold">Pros</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="list-disc pl-4">
+                {pros.map((pro, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <CheckIcon className="text-green-600" />
+                    <span>{pro}</span>
+                  </div>
+                ))}
+              </ul>
+
+              {/* <ul className="list-disc pl-4">
                 <li>Long Battery Life</li>
                 <li>Sleek Design</li>
                 <li>FaceTime</li>
                 <li>No Crashes</li>
                 <li>Secure</li>
-              </ul>
-            </CardContent> */}
+              </ul> */}
+            </CardContent>
           </Card>
-          <Card className="border border-black h-full">
-            {/* <CardHeader>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg font-bold">Cons</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="list-disc pl-4">
+                {cons.map((con, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <XIcon className="text-red-600" />
+                    <span>{con}</span>
+                  </div>
+                ))}
+              </ul>
+              {/* <ul className="list-disc pl-4">
                 <li>Long Battery Life</li>
                 <li>Sleek Design</li>
                 <li>FaceTime</li>
                 <li>No Crashes</li>
                 <li>Secure</li>
-              </ul>
-            </CardContent> */}
+              </ul> */}
+            </CardContent>
           </Card>
         </div>
         <div className="col-span-1 row-span-3">
-          <Card className="border border-black bg-[#e0d4ff] h-full">
-            {/* <CardHeader>
+          <Card>
+            <CardHeader>
               <CardTitle className="text-lg font-bold">What people are saying</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>
+              {/* <p>
                 Our research shows people overall like enjoy the new m1 chip for everyday use, this MacBook still holds
                 up in 2024 as a solid choice for programmers, the etc... (summary from the comments)...
               </p>
               <p className="mt-2">
                 Common points:
-                <ul className="list-disc pl-4">
+                <ul className="list-none pl-4">
                   <li>Short battery life</li>
                   <li>Good aesthetic</li>
                   <li>Sleek Design</li>
                   <li>Battery Problems</li>
                   <li>High Price point</li>
                 </ul>
-              </p>
-            </CardContent> */}
+              </p> */}
+            </CardContent>
           </Card>
         </div>
       </main>

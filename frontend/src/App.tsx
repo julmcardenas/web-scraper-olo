@@ -20,12 +20,7 @@ const mock_data = {
 
 export default function App() {
   const [searchString, setSearchString] = useState("");
-  const [data, setData] = useState({
-    pros: ["Pro 1", "Pro 2", "Pro 3"],
-    cons: ["Con 1", "Con 2", "Con 3"],
-    videos: null,
-    review: null,
-  });
+  const [data, setData] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -61,7 +56,8 @@ export default function App() {
     try {
       const response = await axios.post("http://localhost:5001/scrape", { product: searchString });
       const data = response.data;
-      setData([...data]);
+      console.log("data", data);
+      setData(data);
       setLoading(false);
       // TODO: store data in database
     } catch (err: any) {
@@ -98,13 +94,6 @@ export default function App() {
             </div>
           )}
           {error && <div className="bg-red-500 text-red-50 p-4 rounded-md mb-8">{error}</div>}
-          {/* {data && (
-            <div className="bg-card p-6 rounded-md shadow-md">
-              <h2 className="text-2xl font-bold mb-4">{data}</h2>
-            </div>
-          )} */}
-
-          {/* <DataTable openModal={handleOpen} setModalData={setModalData} /> */}
         </div>
 
         {data && <Result {...data} />}

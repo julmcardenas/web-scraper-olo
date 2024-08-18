@@ -1,14 +1,19 @@
-export default function Card() {
-  return (
-    <div className="border border-black">
-      <div className="text-lg font-bold">Our Verdict</div>
-      <div>
-        <p>
-          Our research shows people overall enjoy the new M1 chip for everyday use; this MacBook still holds up in 2024.
-          Its impressive performance, long battery life, and efficient multitasking capabilities have made it a popular
-          choice among users. The M1 chip's continuing...
-        </p>
-      </div>
-    </div>
-  );
-}
+// Card Component
+export const Card = ({ children }) => {
+  return <div className="border border-black bg-[#e0d4ff] h-full ">{children}</div>;
+};
+
+// CardHeader Component
+export const CardHeader = ({ children }) => {
+  return <div className="pb-4 mb-4 ">{children}</div>;
+};
+
+// CardTitle Component
+export const CardTitle = ({ children, className }) => {
+  return <h2 className="text-lg font-bold text-black">{children}</h2>;
+};
+
+// CardContent Component
+export const CardContent = ({ children }) => {
+  return <div className="text-gray-700">{children}</div>;
+};

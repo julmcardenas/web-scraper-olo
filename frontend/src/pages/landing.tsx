@@ -114,7 +114,7 @@ export default function Trending() {
                 <input
                   type="text"
                   placeholder={placeholder}
-                  className="search-input pr-10 bg-white"
+                  className="search-input pr-10 bg-white text-gray-500"
                   onChange={e => setSearch(e.target.value)}
                   onKeyDown={(e) => submitSearch(e)}
                 />

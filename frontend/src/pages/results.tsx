@@ -7,7 +7,7 @@ import Badge from "../components/ui/Badge";
 import Navbar from "../components/NavBar";
 export default function Results() {
   const { state } = useLocation();
-  const { pros, cons, score, review, videos } = state;
+  const { pros, cons, score, review, videos, title } = state;
   function CheckIcon(props) {
     return (
       <svg
@@ -49,11 +49,11 @@ export default function Results() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4">
+      <div className="min-h-screen bg-[#f7f3f0] flex flex-col items-center p-4 mt-8">
         <main className="w-full max-w-5xl mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="col-span-1 row-span-1">
             <div className="text-center">
-              <h1 className="text-3xl font-bold text-black">2020 Macbook Air Review</h1>
+              <h1 className="text-3xl font-bold text-black">{title}</h1>
               <div className="mt-2 flex justify-center items-center space-x-2">
                 <Badge variant="secondary" className="text-lg">
                   {score}

@@ -64,7 +64,6 @@ export default function App() {
         data.date = new Date().toISOString();
         const res = await axios.post("http://localhost:5001/search", { data, userId: user.id });
       }
-
     } catch (err: any) {
       setError(err.message);
       setLoading(false);

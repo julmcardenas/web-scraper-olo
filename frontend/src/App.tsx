@@ -56,7 +56,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5001/scrape", { product: searchString });
+      const response = await axios.post("http://localhost:5001/scrape/name", { product: searchString });
       const data = response.data;
       console.log("data", data);
       setData(data);

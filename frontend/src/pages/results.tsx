@@ -68,7 +68,7 @@ export default function Results() {
                     style={{
                       backgroundImage: `url(${videos[0].thumbnail})`,
                     }}
-                    onClick={() => window.open(videos[0].url, "_blank", "noopener,noreferrer")}
+                    onClick={() => window.open(videos[0].link, "_blank", "noopener,noreferrer")}
                   ></div>
                 ) : (
                   <div>No video available</div>
@@ -107,7 +107,7 @@ export default function Results() {
                       backgroundPosition: "center",
                       backgroundImage: `url(${video?.thumbnail})`, // Optional: Set a background thumbnail
                     }}
-                    onClick={() => window.open(video.url, "_blank", "noopener,noreferrer")}
+                    onClick={() => window.open(video.link, "_blank", "noopener,noreferrer")}
                   ></div>
                 ))}
               </CardContent>

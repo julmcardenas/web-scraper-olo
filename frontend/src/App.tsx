@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import "./App.css";
@@ -6,7 +6,8 @@ import axios from "axios";
 import DataTable from "./components/Table";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "./components/NavBar";
-
+import Result from "./components/Result";
+import { useNavigate } from "react-router-dom";
 const mock_data = {
   data: {
     url: "https://headstarter.co/",
@@ -23,6 +24,8 @@ export default function App() {
   const [url, setUrl] = useState("");
   const [search, setSearch] = useState("");
   const [data, setData] = useState(null);
+  const navigation = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [openModal, setOpenModal] = useState(false);
@@ -39,15 +42,20 @@ export default function App() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await axios.post("http://localhost:5001/scrape", { product: search });
-      console.log('response', response);
-      const data = response.data;
-      console.log('data', data);
-
-
-      // setData(data);
+    if (search === "") {
       setLoading(false);
+
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:5001/scrape/name", { product: search });
+      const data = response.data;
+      console.log("data", data);
+      setData(data);
+      setLoading(false);
+      navigation("/results", {
+        state: { ...data },
+      });
 
       // save search data to the database
       if (isSignedIn && user) {
@@ -91,60 +99,54 @@ export default function App() {
             </div>
           )}
           {error && <div className="bg-red-500 text-red-50 p-4 rounded-md mb-8">{error}</div>}
-          {data && (
-            <div className="bg-card p-6 rounded-md shadow-md">
-              <h2 className="text-2xl font-bold mb-4">{data}</h2>
-            </div>
-          )}
+        </div>
 
-          <DataTable openModal={handleOpen} setModalData={setModalData} />
-
-          {openModal && modalData && (
-            // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            //   <div className="bg-white p-6 rounded-md shadow-md text-gray-600">
-            //     <h2 className="text-2xl font-bold mb-4">Modal</h2>
-            //     <p className="text-muted-foreground mb-4">{modalData.description}</p>
-            //     <button onClick={handleClose} className="px-4 py-2 bg-primary text-gray-600 rounded-md">
-            //       Close
-            //     </button>
-            //   </div>
-            // </div>
-            <>
-              <p>
-                <a>{modalData.url}</a>
-              </p>
-              <p>{modalData.description}</p>
-            </>
-          )}
-          {openModal && modalData && (
-            <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4">{modalData.url}</h2>
-              <p className="text-muted-foreground mb-4">{modalData.description}</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <h3 className="text-lg font-bold mb-2">Headings</h3>
-                  <ul className="list-disc pl-4 space-y-2">
-                    {modalData.headings.map((heading, i) => (
-                      <li key={i}>{heading}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold mb-2">Links</h3>
-                  <ul className="list-disc pl-4 space-y-2">
-                    {modalData.links.map((link, i) => (
-                      <li key={i}>
-                        <a href="#" className="text-primary hover:underline">
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        {/* {data && <Result {...data} />} */}
+        {/* {openModal && modalData && (
+          // <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          //   <div className="bg-white p-6 rounded-md shadow-md text-gray-600">
+          //     <h2 className="text-2xl font-bold mb-4">Modal</h2>
+          //     <p className="text-muted-foreground mb-4">{modalData.description}</p>
+          //     <button onClick={handleClose} className="px-4 py-2 bg-primary text-gray-600 rounded-md">
+          //       Close
+          //     </button>
+          //   </div>
+          // </div>
+          <>
+            <p>
+              <a>{modalData.url}</a>
+            </p>
+            <p>{modalData.description}</p>
+          </>
+        )} */}
+        {openModal && modalData && (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">{modalData.url}</h2>
+            <p className="text-muted-foreground mb-4">{modalData.description}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <h3 className="text-lg font-bold mb-2">Headings</h3>
+                <ul className="list-disc pl-4 space-y-2">
+                  {modalData.headings.map((heading, i) => (
+                    <li key={i}>{heading}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold mb-2">Links</h3>
+                <ul className="list-disc pl-4 space-y-2">
+                  {modalData.links.map((link, i) => (
+                    <li key={i}>
+                      <a href="#" className="text-primary hover:underline">
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </>
   );

@@ -7,6 +7,7 @@ import "./index.css";
 import Search from "./pages/search";
 import SearchHistory from "./pages/history";
 import Trending from "./pages/trending";
+import Results from "./pages/results";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/trending",
     element: <Trending />,
+  },
+  {
+    path: "/results",
+    element: <Results />,
   },
 ]);
 

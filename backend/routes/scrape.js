@@ -7,8 +7,8 @@ const { YoutubeTranscript } = require("youtube-transcript");
 const { model } = require("mongoose");
 require("dotenv").config();
 
-const YOUTUBE_KEY = process.env.YOUTUBE_KEY
-const GEMINI_KEY = process.env.GEMINI_KEY
+const YOUTUBE_KEY = 'AIzaSyCX6zlfTXZSyaiXZUYZtP3bc00LtpUa6GE'
+const GEMINI_KEY = 'AIzaSyBnTF9d4HRlNwRczA2H8oooefXcZ6OfLQ4'
 const client = new GoogleGenerativeAI(GEMINI_KEY);
 async function fetchYouTubeVideos(productName, numResults) {
   const searchQuery = `${productName} review`;
@@ -82,14 +82,11 @@ async function getFinalReview(summaries, product) {
 }
 
 async function scrape(url) {
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url);
   const title = await page.title();
-  // const data = await page.evaluate(() => {
-  //   // Replace this with the actual data extraction logic
-  //   return document.querySelector("h1").innerText;
-  // });
   await browser.close()
 
   return title;
@@ -114,6 +111,7 @@ router.post("/name", async (req, res) => {
   const summaries = await getSummaries(transcripts, product);
   const review = await getFinalReview(summaries, product);
   res.json({
+    productName: product,
     review: review["review"],
     pros: review["pros"],
     cons: review["cons"],
@@ -124,19 +122,28 @@ router.post("/name", async (req, res) => {
 
 router.post("/url", async (req, res) => {
   const { url } = req.body;
-  const product = await scrape(url);
-  const [vidIds, vidTitles] = await fetchYouTubeVideos(product, 3);
-  const ytdata = await getYoutubeData(vidIds);
-  const transcripts = await fetchVideoTranscripts(vidIds);
-  const summaries = await getSummaries(transcripts, product);
-  const review = await getFinalReview(summaries, product);
-  res.json({
-    review: review["review"],
-    pros: review["pros"],
-    cons: review["cons"],
-    score: review["score"],
-    videos: ytdata,
-  });
+  try {
+    const product = await scrape(url);
+    const [vidIds, vidTitles] = await fetchYouTubeVideos(product, 3);
+    const ytdata = await getYoutubeData(vidIds);
+    const transcripts = await fetchVideoTranscripts(vidIds);
+    const summaries = await getSummaries(transcripts, product);
+    const review = await getFinalReview(summaries, product);
+    res.json({
+      productName: product,
+      review: review["review"],
+      pros: review["pros"],
+      cons: review["cons"],
+      score: review["score"],
+      videos: ytdata,
+    });
+  } catch (error) {
+    return res.status(500).json({ 
+      error: "Failed to scrape the product from the provided URL",
+      message: error.message 
+    });
+  }
+
 });
 
 module.exports = router;
